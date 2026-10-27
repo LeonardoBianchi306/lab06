@@ -1,6 +1,7 @@
 package it.unibo.collections;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +42,7 @@ public final class UseListsAndMaps {
         Integer temp;
         temp = arrList.get(0);
         arrList.set(0, arrList.get(arrList.size()-1));
-        arrList.set(arrList.get(arrList.size()-1), temp);
+        arrList.set(arrList.size()-1, temp);
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
          */
@@ -75,6 +76,19 @@ public final class UseListsAndMaps {
          * LinkedList, using the collections of point 5. In order to measure
          * times, use as example TestPerformance.java.
          */
+        time = System.nanoTime();
+        for (int i = 0; i < 1000; i++) {
+            arrList.get(arrList.size() / 2);
+        }
+        time = System.nanoTime() - time;
+        IO.println("ArrayList middle reading time: " + time + " ns");
+
+        time = System.nanoTime();
+        for (int i = 0; i < 1000; i++) {
+            linkedList.get(linkedList.size() / 2);
+        }
+        time = System.nanoTime() - time;
+        IO.println("LinkedList middle reading time: " + time + " ns");
         /*
          * 7) Build a new Map that associates to each continent's name its
          * population:
@@ -91,8 +105,20 @@ public final class UseListsAndMaps {
          *
          * Oceania -> 38,304,000
          */
+        Map<String, Long> populationMap = new HashMap<String,Long>();
+        populationMap.put("Africa", 1110635000L);
+        populationMap.put("Americas", 972005000L);
+        populationMap.put("Antarctica", 0L);
+        populationMap.put("Asia", 4298723000L);
+        populationMap.put("Europe", 742452000L);
+        populationMap.put("Oceania", 38304000L);
         /*
          * 8) Compute the population of the world
          */
+        long worldPopulation = 0;
+        for(long population : populationMap.values()){
+            worldPopulation += population;
+        }
+        IO.println("Popolazione mondiale --> " + worldPopulation);
     }
 }
