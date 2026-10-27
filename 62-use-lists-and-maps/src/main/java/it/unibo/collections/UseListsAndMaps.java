@@ -1,5 +1,7 @@
 package it.unibo.collections;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,19 +22,32 @@ public final class UseListsAndMaps {
          * 1) Create a new ArrayList<Integer>, and populate it with the numbers
          * from 1000 (included) to 2000 (excluded).
          */
+        ArrayList<Integer> arrList = new ArrayList<>();
+        for(int i = 1000; i < 2000; i++){
+            arrList.add(i);
+        }
         /*
          * 2) Create a new LinkedList<Integer> and, in a single line of code
          * without using any looping construct (for, while), populate it with
          * the same contents of the list of point 1.
          */
+        LinkedList<Integer> linkedList = new LinkedList<>(arrList);
+
         /*
          * 3) Using "set" and "get" and "size" methods, swap the first and last
          * element of the first list. You can not use any "magic number".
          * (Suggestion: use a temporary variable)
          */
+        Integer temp;
+        temp = arrList.get(0);
+        arrList.set(0, arrList.get(arrList.size()-1));
+        arrList.set(arrList.get(arrList.size()-1), temp);
         /*
          * 4) Using a single for-each, print the contents of the arraylist.
          */
+        for (Integer elem : arrList) {
+            IO.println(elem);
+        }
         /*
          * 5) Measure the performance of inserting new elements in the head of
          * the collection: measure the time required to add 100.000 elements as
@@ -40,6 +55,20 @@ public final class UseListsAndMaps {
          * using the previous lists. In order to measure times, use as example
          * TestPerformance.java.
          */
+        long time = System.nanoTime();
+        for(int i = 0; i < 100_000; i++){
+            arrList.add(0, i);
+        }
+        time = System.nanoTime() - time;
+        IO.println("ArrayList head insercition time: " + time + "ns");
+
+
+        time = System.nanoTime();
+        for(int i = 0; i < 100_000; i++){
+            linkedList.add(0, i);
+        }
+        time = System.nanoTime() - time;
+        IO.println("LinkedList head insercition time: " + time + "ns");
         /*
          * 6) Measure the performance of reading 1000 times an element whose
          * position is in the middle of the collection for both ArrayList and
