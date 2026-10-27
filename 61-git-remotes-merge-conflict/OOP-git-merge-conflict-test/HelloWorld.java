@@ -1,5 +1,6 @@
 int procNumber() {
 	return Runtime.getRuntime().availableProcessors();
+	
 }
 
 void main() {
